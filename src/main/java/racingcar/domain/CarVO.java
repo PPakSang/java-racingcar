@@ -20,14 +20,6 @@ public class CarVO {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,5 +31,10 @@ public class CarVO {
     @Override
     public int hashCode() {
         return Objects.hash(name, position);
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " : " + "-".repeat(this.position);
     }
 }

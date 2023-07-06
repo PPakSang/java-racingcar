@@ -12,7 +12,7 @@ public class OutputView {
 
     public static void printRound(RaceResponse raceResponse) {
         for (CarVO carVO : raceResponse.getCars()) {
-            System.out.printf("%s : %s%n", carVO.getName(), carVO.getPosition());
+            System.out.printf("%s\n", carVO);
         }
         System.out.println();
     }
