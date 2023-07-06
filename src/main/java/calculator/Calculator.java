@@ -1,12 +1,15 @@
 package calculator;
 
 public class Calculator {
-    public static int sum(String text) {
-        if (isEmpty(text)) {
+    public static int sum(String input) {
+        if (isEmpty(input)) {
             return 0;
         }
 
-        Numbers numbers = Numbers.of(Parser.parse(text));
+        Text text = Text.from(input);
+        Numbers numbers = Numbers.of(text.getNames());
+
+//        Numbers numbers = Numbers.of(Parser.parse(text));
 
         return numbers.sumAll();
     }
