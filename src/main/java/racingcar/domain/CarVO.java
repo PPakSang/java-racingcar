@@ -35,6 +35,6 @@ public class CarVO {
 
     @Override
     public String toString() {
-        return this.name + " : " + "-".repeat(this.position);
+        return this.name + " : " + "-".repeat(this.position) + "(" + this.position + ")";
     }
 }

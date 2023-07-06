@@ -1,6 +1,7 @@
 package racingcar.service;
 
 import racingcar.NumberGenerator;
+import racingcar.domain.CarVO;
 import racingcar.domain.Cars;
 import racingcar.domain.Round;
 import racingcar.dto.RaceRequest;
@@ -14,6 +15,8 @@ public class Race {
 
     private final Cars cars;
     private final Round leftRound;
+
+    private final List<List<CarVO>> raceRecords = new ArrayList<>();
 
     private Race(Cars cars, int leftRound) {
         this.cars = cars;
@@ -48,6 +51,15 @@ public class Race {
         }
     }
 
+    public List<List<CarVO>> playAll(NumberGenerator numberGenerator) {
+        for (int i = 0; i < leftRound.getRound(); i++) {
+            play(numberGenerator);
+            List<CarVO> list = CarVO.toList(cars.getCars());
+            raceRecords.add(list);
+        }
+        return raceRecords;
+    }
+
     private void doPlay(NumberGenerator numberGenerator, Car car) {
         if (RaceUtil.determineCarMovement(numberGenerator.generate())) {
             car.moveForward();
@@ -55,19 +67,7 @@ public class Race {
     }
 
     public String[] findWinners() {
-        int maxPosition = 0;
-        for (Car car : cars.getCars()) {
-            maxPosition = Math.max(car.getPosition(), maxPosition);
-        }
-
-        List<String> names = new ArrayList<>();
-        for (Car car : cars.getCars()) {
-            if (maxPosition == car.getPosition()) {
-                names.add(car.getName());
-            }
-        }
-
-        return names.toArray(String[]::new);
+        return cars.findWinners();
     }
 
     private void startRound() {

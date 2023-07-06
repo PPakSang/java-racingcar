@@ -34,10 +34,6 @@ public class RaceController {
     }
 
     private void doRace() {
-        int leftRound = race.getLeftRound();
-        for (int round = 0; round < leftRound; round++) {
-            race.play(numberGenerator);
-            OutputView.printRound(new RaceResponse(race.getCars()));
-        }
+        race.playAll(numberGenerator).forEach(list -> OutputView.printRound(new RaceResponse(list)));
     }
 }
