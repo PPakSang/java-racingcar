@@ -23,4 +23,20 @@ public class Cars {
     public void add(Car car) {
         this.cars.add(car);
     }
+
+    public String[] findWinners() {
+        int maxPosition = 0;
+        for (Car car : cars) {
+            maxPosition = Math.max(car.getPosition(), maxPosition);
+        }
+
+        List<String> names = new ArrayList<>();
+        for (Car car : cars) {
+            if (maxPosition == car.getPosition()) {
+                names.add(car.getName());
+            }
+        }
+
+        return names.toArray(new String[0]);
+    }
 }
